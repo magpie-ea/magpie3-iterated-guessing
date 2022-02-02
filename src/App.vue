@@ -41,26 +41,9 @@
     </Screen>
     </template>
 
-
-    <!--
-
-      Comment this in, to try out interactive components like the Chat component.
-
-      <ConnectInteractiveScreen />
-
-      <Screen>
-          <Chat :messages.sync="$magpie.measurements.messages"></Chat>
-          <button @click="$magpie.saveAndNextScreen()">Next</button>
-      </Screen>
-
-      -->
-
     <PostTestScreen />
 
-    <!-- While developing your experiment, using the DebugResults screen is fine,
-      once you're going live, you can use the <SubmitResults> screen to automatically send your experimental data to the server. -->
-      <SubmitResultsScreen/>
-    <!-- <DebugResultsScreen /> -->
+    <SubmitResultsScreen />
   </Experiment>
 </template>
 
