@@ -7,11 +7,11 @@
       You can take this value as an orientation for yourself, but you should give your own best guess.
     </InstructionScreen>
 
-    <!-- <ConnectInteractiveScreen :title="'Connecting...'"></ConnectInteractiveScreen> -->
+    <ConnectInteractiveScreen :title="'Connecting...'"></ConnectInteractiveScreen>
 
-    <AwaitIteratedResultScreen :title="'Waiting for previous participants'">
-      Please wait while we retrieve the data from previous participants.
-    </AwaitIteratedResultScreen>
+    <!-- <AwaitIteratedResultScreen :title="'Waiting for previous participants'"> -->
+    <!--   Please wait while we retrieve the data from previous participants. -->
+    <!-- </AwaitIteratedResultScreen> -->
 
     <!-- Here we create screens in a loop for every entry in forced_choice -->
     <template v-for="(trial, i) of guessingTrials">
@@ -20,6 +20,9 @@
       <Slide>
         <p> <strong>{{trial.question}}</strong></p>
         <p style="textcolor:'gray'"> A previous participant answered {{trial.defaultGuess}} {{trial.unit}}.</p>
+        <p> Chain: {{$magpie.socket.chain}} </p>
+        <p> Generation: {{$magpie.socket.generation}} </p>
+        <p> Last iteration results: {{$magpie.socket.lastIterationResults}} </p>
         <TextareaInput
             :response.sync= "$magpie.measurements.guess"
           />
@@ -56,7 +59,7 @@
 
     <!-- While developing your experiment, using the DebugResults screen is fine,
       once you're going live, you can use the <SubmitResults> screen to automatically send your experimental data to the server. -->
-      <SubmitResults/>
+      <SubmitResultsScreen/>
     <!-- <DebugResultsScreen /> -->
   </Experiment>
 </template>
