@@ -1,100 +1,43 @@
 <template>
   <Experiment title="magpie3-iterated-guessing">
     <InstructionScreen :title="'Welcome'">
-      This is a sample introduction screen.
-      <br />
-      <br />
-      This screen welcomes the participant and gives general information about
-      the experiment.
-      <br />
-      <br />
-      This mock up experiment is a showcase of the functionality of magpie.
+      In this experiment you will be asked to guess quantities of everyday events.
+      This can sometimes be difficult.
+      This is why we show you on each trial how a one previous participant in this experiment has answered the question.
+      You can take this value as an orientation for yourself, but you should give your own best guess.
     </InstructionScreen>
 
-    <InstructionScreen :title="'General Instructions'">
-      This is a sample instructions view.
-      <br />
-      <br />
-      First you will go through two practice trials. The practice trial view
-      uses magpie's forced choice trial input.
-    </InstructionScreen>
+    <!-- <ConnectInteractiveScreen :title="'Connecting...'"></ConnectInteractiveScreen> -->
+
+    <AwaitIteratedResultScreen :title="'Waiting for previous participants'">
+      Please wait while we retrieve the data from previous participants.
+    </AwaitIteratedResultScreen>
 
     <!-- Here we create screens in a loop for every entry in forced_choice -->
-    <template v-for="(forced_choice_task, i) of forced_choice">
-      <ForcedChoiceScreen
-        :key="'forcedchoice-' + i"
-        :progress="i / forced_choice.length"
-        :question="forced_choice_task.question"
-        :options="[forced_choice_task.option1, forced_choice_task.option2]"
-      >
-        <template #stimulus>
-          <img :src="forced_choice_task.picture" />
-        </template>
-      </ForcedChoiceScreen>
+    <template v-for="(trial, i) of guessingTrials">
+      <Screen :key="i">
+
+      <Slide>
+        <p> <strong>{{trial.question}}</strong></p>
+        <p style="textcolor:'gray'"> A previous participant answered {{trial.defaultGuess}} {{trial.unit}}.</p>
+        <TextareaInput
+            :response.sync= "$magpie.measurements.guess"
+          />
+        <p v-if= "$magpie.measurements.guess && isNaN($magpie.measurements.guess)">Please enter a number!</p>
+        <button
+          v-if= "$magpie.measurements.guess && !isNaN($magpie.measurements.guess)"
+          @click="$magpie.saveAndNextScreen();">
+          Next
+        </button>
+
+        <Record :data="{
+              item: trial.item,
+            }" />
+      </Slide>
+
+    </Screen>
     </template>
 
-    <template v-for="(dropdown_task, i) in multi_dropdown">
-      <CompletionScreen
-        :key="'multidropdown-' + i"
-        :progress="i / multi_dropdown.length"
-        :text="
-          dropdown_task.sentence_chunk_1 +
-          ' %s ' +
-          dropdown_task.sentence_chunk_2 +
-          ' %s ' +
-          dropdown_task.sentence_chunk_3
-        "
-        :options="[
-          dropdown_task.choice_options_1.split('|'),
-          dropdown_task.choice_options_2.split('|')
-        ]"
-      />
-    </template>
-
-    <template v-for="i in range(0, sentenceChoice.length, 2)">
-      <template v-for="(sentenceChoice_task, j) in sentenceChoice.slice(i, 2)">
-        <ForcedChoiceScreen
-          :key="'sentenceChoice-' + i + '' + j"
-          :question="sentenceChoice_task.question"
-          :options="[sentenceChoice_task.option1, sentenceChoice_task.option2]"
-        >
-          <template #stimulus>
-            <img :src="sentenceChoice_task.picture" />
-          </template>
-        </ForcedChoiceScreen>
-      </template>
-      <template v-for="(imageSelection_task, j) in imageSelection.slice(i, 2)">
-        <ImageSelectionScreen
-          :key="'sentenceChoice-' + i + '' + j"
-          :question="imageSelection_task.question"
-          :options="[
-            {
-              label: imageSelection_task.option1,
-              src: imageSelection_task.picture1
-            },
-            {
-              label: imageSelection_task.option2,
-              src: imageSelection_task.picture2
-            }
-          ]"
-        />
-      </template>
-    </template>
-
-    <template v-for="(rating_task, i) in sliderRating">
-      <SliderScreen
-        :key="'sliderRating-' + i"
-        :pause-time="500"
-        :stimulus-time="1500"
-        :question="rating_task.question"
-        :option-left="rating_task.optionLeft"
-        :option-right="rating_task.optionRight"
-      >
-        <template #stimulus>
-          <img :src="rating_task.picture" alt="" />
-        </template>
-      </SliderScreen>
-    </template>
 
     <!--
 
@@ -113,26 +56,21 @@
 
     <!-- While developing your experiment, using the DebugResults screen is fine,
       once you're going live, you can use the <SubmitResults> screen to automatically send your experimental data to the server. -->
-    <DebugResultsScreen />
+      <SubmitResults/>
+    <!-- <DebugResultsScreen /> -->
   </Experiment>
 </template>
 
 <script>
 // Load data from csv files as javascript arrays with objects
-import forced_choice from '../trials/forced_choice.csv';
-import multi_dropdown from '../trials/multi_dropdown.csv';
-import sentenceChoice from '../trials/sentence_choice.csv';
+import guessingTrials from '../trials/guessingTrials.csv';
 import _ from 'lodash';
 
 export default {
   name: 'App',
   data() {
     return {
-      forced_choice,
-      multi_dropdown,
-      sentenceChoice,
-      imageSelection: _.shuffle(imageSelection),
-      sliderRating,
+      guessingTrials,
 
       // Expose lodash.range to template above
       range: _.range
@@ -140,58 +78,4 @@ export default {
   }
 };
 
-const imageSelection = [
-  {
-    QUD: 'image selection - loop: 1, trial: 1',
-    question: 'How are you today?',
-    option1: 'fine',
-    picture1: 'images/question_mark_02.png',
-    option2: 'great',
-    picture2: 'images/question_mark_01.png'
-  },
-  {
-    QUD: 'image selection - loop: 1, trial: 2',
-    option1: 'shiny',
-    picture1: 'images/question_mark_03.jpg',
-    option2: 'rainbow',
-    picture2: 'images/question_mark_04.png'
-  },
-  {
-    QUD: 'image selection - loop: 2, trial: 1',
-    question: 'How are you today?',
-    option1: 'fine',
-    picture1: 'images/question_mark_03.jpg',
-    option2: 'great',
-    picture2: 'images/question_mark_01.png'
-  },
-  {
-    QUD: 'image selection - loop: 2, trial: 2',
-    option1: 'shiny',
-    picture1: 'images/question_mark_02.png',
-    option2: 'rainbow',
-    picture2: 'images/question_mark_04.png'
-  }
-];
-
-const sliderRating = [
-  {
-    picture: 'images/question_mark_02.png',
-    question: 'How are you today?',
-    optionLeft: 'fine',
-    optionRight: 'great'
-  },
-  {
-    picture: 'images/question_mark_01.png',
-    question: "What's the weather like?",
-    optionLeft: 'shiny',
-    optionRight: 'rainbow'
-  },
-  {
-    QUD: 'Here is a sentence that stays on the screen from the very beginning',
-    picture: 'images/question_mark_03.jpg',
-    question: "What's on the bread?",
-    optionLeft: 'ham',
-    optionRight: 'jam'
-  }
-];
 </script>
