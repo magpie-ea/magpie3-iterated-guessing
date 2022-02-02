@@ -1,5 +1,5 @@
 <template>
-  <Experiment title="magpie demo">
+  <Experiment title="magpie3-iterated-guessing">
     <InstructionScreen :title="'Welcome'">
       This is a sample introduction screen.
       <br />
