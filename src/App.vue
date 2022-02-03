@@ -9,6 +9,8 @@
 
     <ConnectInteractiveScreen :title="'Connecting...'"></ConnectInteractiveScreen>
 
+    <AwaitIteratedResultScreen :title="'Waiting for previous participant to finish'"></AwaitIteratedResultScreen>
+
     <template v-for="(trial, i) of guessingTrials">
       <Screen :key="i">
 
