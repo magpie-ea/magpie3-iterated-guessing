@@ -1,3 +1,5 @@
-item,question,defaultGuess,unit
-water,"How many liters of water does an adult US citizen use per day on average?","25","liters"
-calories,"How many kilo-calories does an adult US citizen take in per day on average?","2000","kcal"
+variant,item,question,defaultGuess,unit
+1,water,"How many liters of water does an adult UK citizen use per day on average (for consumption, cooking, washing, etc.?)","20","liters"
+1,calories,"How many kilo-calories does an adult UK citizen take in per day on average?","4000","kcal"
+2,water,"How many liters of water does an adult UK citizen use per day on average (for consumption, cooking, washing, etc.)?","500","liters"
+2,calories,"How many kilo-calories does an adult UK citizen take in per day on average?","1000","kcal"
