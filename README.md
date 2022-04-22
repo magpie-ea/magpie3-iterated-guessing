@@ -1,14 +1,19 @@
-# magpie3-iterated-guessing
+# Iterated guessing experiment
 
-Set up the project with `npm install`
+This is an iterative (dynamic) experiment, implemented with [magpie](https://magpie-manual.netlify.app/).
+
+Participants guess mundane quantities (e.g., average calorie intake per day of an adult UK citizen). 
+They also receive the guess of the previous participant (possibly creating a king of iterative anchoring effect). 
+
+Online version: https://magpie-ea.github.io/magpie3-iterated-guessing/
+
+## Local use
+
+Clone repo, then set up the project with `npm install`
 
 To run the project locally, run `npm run serve`
 
 To build the project for deployment (e.g. to Netlify), run `npm run build`
 
-If you are hosting this repository on github, the project will automatically be built and deployed to the gh-pages branch, so you only have to enable Github Pages in your repository settings to publish your project.
 
-For more information, see the [manual](https://magpie-manual.netlify.app/).
-
-To automatically fix coding style and format the code (linting) run `npm run lint` and `npm run lint:style`
 
