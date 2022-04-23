@@ -9,9 +9,12 @@
 
     <ConnectInteractiveScreen :title="'Connecting...'"></ConnectInteractiveScreen>
 
-    <AwaitIteratedResultScreen :title="'Waiting for previous participant to finish'"></AwaitIteratedResultScreen>
+    <AwaitIteratedResultScreen :title="'Waiting for previous participant to finish'">
+    </AwaitIteratedResultScreen>
+    
+    <Wait :time="0" @done="prepareData();$magpie.nextScreen()" />
 
-    <Screen :title="'Get ready'">
+    <!-- <Screen :title="'Get ready'">
 			Ready to start the experiment.
 			<br>
 			<br>
@@ -19,7 +22,7 @@
 			<button @click="prepareData();$magpie.nextScreen();">
 				Next
 			</button>
-		</Screen>
+		</Screen> -->
 
     <template v-for="(trial, i) of guessingTrials">
       <Screen :key="i">
