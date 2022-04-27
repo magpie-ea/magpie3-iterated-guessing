@@ -45,7 +45,8 @@
 
         <Record :data="{
               item: trial.item,
-              variant: trial.variant
+              variant: trial.variant,
+              anchor: getPreviousResponse(trial.item)
             }" />
       </Slide>
 
@@ -74,9 +75,9 @@ export default {
   },
   methods: {
     prepareData: function(){
-      console.log("variant: ", this.$magpie.socket.variant)
-      console.log("chain: ", this.$magpie.socket.chain)
-      console.log("generation: ", this.$magpie.socket.generation)
+      // console.log("variant: ", this.$magpie.socket.variant)
+      // console.log("chain: ", this.$magpie.socket.chain)
+      // console.log("generation: ", this.$magpie.socket.generation)
       var variant = this.$magpie.socket.variant
       this.guessingTrials = _.shuffle(_.filter(this.guessingTrials, {'variant' : variant}))
     },
