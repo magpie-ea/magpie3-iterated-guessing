@@ -1,5 +1,7 @@
 variant,item,question,defaultGuess,unit
 1,water,"How many liters of water does an adult UK citizen use per day on average (for consumption, cooking, washing, etc.?)","20","liters"
 1,calories,"How many kilo-calories does an adult UK citizen take in per day on average?","4000","kcal"
+1,mobile,"How many minutes does an adult UK citizen spent using their mobile phone per day on average?","15","minutes"
 2,water,"How many liters of water does an adult UK citizen use per day on average (for consumption, cooking, washing, etc.)?","500","liters"
 2,calories,"How many kilo-calories does an adult UK citizen take in per day on average?","1000","kcal"
+2,mobile,"How many minutes does an adult UK citizen spent using their mobile phone per day on average?","240","minutes"
