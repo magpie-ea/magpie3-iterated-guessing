@@ -44,9 +44,11 @@
         </button>
 
         <Record :data="{
-              item: trial.item,
-              variant: trial.variant,
-              anchor: getPreviousResponse(trial.item)
+              item       : trial.item,
+              chain      : trial.chain,
+              generation : trial.generation,
+              variant    : trial.variant,
+              anchor     : getPreviousResponse(trial.item)
             }" />
       </Slide>
 
