@@ -44,8 +44,8 @@
         </button>
 
         <Record :data="{
-              chain      : trial.chain,
-              generation : trial.generation,
+              chain      : $magpie.socket.chain,
+              generation : $magpie.socket.generation,
               variant    : trial.variant,
               item       : trial.item,
               anchor     : getPreviousResponse(trial.item)
