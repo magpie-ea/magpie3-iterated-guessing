@@ -4,7 +4,7 @@
       In this experiment you will be asked to guess quantities of everyday events or acts.
       This can sometimes be difficult.
       This is why each trial shows the answer of the previous participant in this experiment for the same question.
-      You can take this value as an orientation for yourself, but you should give your own best guess.
+      You can use this value for orientation, but you should give your own best guess.
     </InstructionScreen>
 
     <ConnectInteractiveScreen :title="'Connecting...'"></ConnectInteractiveScreen>
