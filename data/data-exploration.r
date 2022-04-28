@@ -34,3 +34,8 @@ d %>%
   facet_grid(item ~ variant, scales = "free")
 # it looks like the effect of the initial seed is washed out 
 # quickly after a number of trials
+
+# check if 'anchor' is always previous participant's 'guess'
+d %>% select(submission_id, variant, item, chain, generation, anchor, guess) %>% 
+  arrange(item,variant,chain,generation) %>% 
+  View()
