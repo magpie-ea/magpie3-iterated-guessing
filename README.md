@@ -1,6 +1,6 @@
 # Iterated guessing experiment
 
-This is an iterative (dynamic) experiment, implemented with [magpie](https://magpie-manual.netlify.app/).
+This is an iterative (dynamic) experiment, implemented with [magpie](https://magpie-experiments.org).
 
 Participants guess mundane quantities (e.g., average calorie intake per day of an adult UK citizen). 
 They also receive the guess of the previous participant (possibly creating a king of iterative anchoring effect). 
